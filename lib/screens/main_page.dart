@@ -13,7 +13,7 @@ class MainPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Friend-Finder App'),
+          title: Text('Frienderr'),
           bottom: TabBar(
             tabs: [
               Tab(text: 'Home'),
