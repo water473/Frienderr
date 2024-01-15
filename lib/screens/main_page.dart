@@ -1,10 +1,10 @@
 // lib/screens/main_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/screens/user_profile.dart';
+import 'package:frienderr/screens/chat_screen.dart';
+import 'user_profile.dart';
 import 'home_tab.dart';
 import 'chat_screen.dart';
-import 'user_profile.dart';
 
 class MainPage extends StatelessWidget {
   @override
