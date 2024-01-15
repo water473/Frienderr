@@ -6,29 +6,47 @@ import 'user_profile.dart';
 import 'home_tab.dart';
 import 'chat_screen.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  int _currentIndex = 0;
+  final List<Widget> _pages = [HomeTab(), ChatScreen(), UserProfile()];
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Friend-Finder App'),
-          bottom: TabBar(
-            tabs: [
-              Tab(text: 'Home'),
-              Tab(text: 'Chat'),
-              Tab(text: 'My Profile'),
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.pink,
+        title: Text('Friend-Finder App'),
+      ),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pages,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-        ),
-        body: TabBarView(
-          children: [
-            HomeTab(),
-            ChatScreen(),
-            UserProfile(),
-          ],
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'Chat',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'My Profile',
+          ),
+        ],
       ),
     );
   }
