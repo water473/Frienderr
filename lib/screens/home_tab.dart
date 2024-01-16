@@ -113,7 +113,7 @@ class _HomeTabState extends State<HomeTab> {
           children: <Widget>[
 // If you are using local assets for default images, make sure they are listed in your pubspec.yaml
             Image.asset(user.imagePath,
-                width: 100, height: 100, fit: BoxFit.cover),
+                width: 200, height: 200, fit: BoxFit.cover),
             SizedBox(width: 16),
             Expanded(
               child: Column(
