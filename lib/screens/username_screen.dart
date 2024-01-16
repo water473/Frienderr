@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'interests_screen.dart';
+import 'package:frienderr/screens/main_page.dart';
 
 class UsernameScreen extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
@@ -12,9 +12,23 @@ class UsernameScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 50),
+
+            const Icon(
+              Icons.people,
+              size: 100,
+            ),
+
+            const SizedBox(height: 25),
+
             TextField(
               controller: _usernameController,
               decoration: InputDecoration(labelText: 'Enter your username'),
+            ),
+            SizedBox(height: 10),
+            TextField(
+              controller: _usernameController,
+              decoration: InputDecoration(labelText: 'Enter your Password'),
             ),
             SizedBox(height: 20),
             ElevatedButton(
@@ -22,11 +36,11 @@ class UsernameScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => InterestsScreen(),
+                    builder: (context) => MainPage(),
                   ),
                 );
               },
-              child: Text('Submit'),
+              child: Text('Log In'),
             ),
           ],
         ),
