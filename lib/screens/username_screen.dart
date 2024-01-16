@@ -12,7 +12,13 @@ class UsernameScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 50),
+            const SizedBox(height: 20),
+
+            const Text(
+              'Frienderr',
+            )
+
+            const SizedBox(height: 20),
 
             const Icon(
               Icons.people,
