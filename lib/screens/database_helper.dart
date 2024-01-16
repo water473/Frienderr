@@ -11,7 +11,7 @@ class DatabaseHelper {
   static final columnUsername = 'username';
   static final columnPassword = 'password';
   static final columnInterests = 'interests';
-  static final columnImage = 'image';
+  static final columnImagePath = 'imagePath';
   static final columnAge = 'age';
   static final columnSchool = 'school';
 
@@ -26,11 +26,71 @@ class DatabaseHelper {
   // Open the database and create it if it doesn't exist.
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), _databaseName);
-    return await openDatabase(path,
-        version: _databaseVersion, onCreate: _onCreate, onOpen: (db) {
-      // Clear the database by dropping the table and recreating it
-      db.execute('DROP TABLE IF EXISTS $table');
-      _onCreate(db, _databaseVersion);
+    return await openDatabase(
+      path,
+      version: _databaseVersion,
+      onCreate: _onCreate,
+      onOpen: (db) async {
+        // Clear the database by dropping the table and recreating it
+        await db.execute('DROP TABLE IF EXISTS $table');
+        await _onCreate(db, _databaseVersion);
+
+        // Insert five default users
+        await _insertDefaultUser(
+            db,
+            'dmahairas',
+            'Dimitrios Mahairas',
+            '1234',
+            '17',
+            'Bronx Science',
+            'Reading, Traveling',
+            'assets/images/defaulat_dimitri.jpg');
+        await _insertDefaultUser(
+            db,
+            'ntalukdar',
+            'Navil Talukdar',
+            '1234',
+            '17',
+            'Bronx Science',
+            'Music, Gaming',
+            'assets/images/navil_default.jpg');
+        await _insertDefaultUser(
+            db,
+            'asirota',
+            'Adam Sirota',
+            '1234',
+            '30',
+            'Laguardia',
+            'Movies, Technology',
+            'assets/images/adam_default.jpg');
+        await _insertDefaultUser(db, 'ljames', 'Lebron James', '1234', '35',
+            'NBA', 'Basketball', 'assets/images/lebron_image.png');
+        await _insertDefaultUser(db, 'alam101', 'Rakeen Alam', '1234', '16',
+            'MSHS 141', 'Making Money', 'assets/images/rakeen_image.jpg');
+        // ... Add two more default users ...
+      },
+    );
+  }
+
+// Helper method to insert a default user
+  Future<void> _insertDefaultUser(
+      Database db,
+      String username,
+      String name,
+      String password,
+      String age,
+      String school,
+      String interests,
+      String imagePath) async {
+    await db.insert(table, {
+      'username': username,
+      'name': name,
+      'password': password,
+      'age': age,
+      'school': school,
+      'interests': interests,
+      'imagePath':
+          imagePath, // Make sure this points to a valid image path or asset
     });
   }
 
@@ -43,7 +103,7 @@ class DatabaseHelper {
             $columnUsername TEXT NOT NULL,
             $columnPassword TEXT NOT NULL,
             $columnInterests TEXT NOT NULL,
-            $columnImage TEXT NOT NULL,
+            $columnImagePath TEXT NOT NULL,
             $columnAge TEXT NOT NULL,
             $columnSchool TEXT NOT NULL
           )
@@ -112,7 +172,7 @@ class DatabaseHelper {
           columnUsername,
           columnPassword,
           columnInterests,
-          columnImage,
+          columnImagePath,
           columnAge,
           columnSchool
         ],

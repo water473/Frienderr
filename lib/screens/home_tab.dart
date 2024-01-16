@@ -1,61 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:swipe_cards/swipe_cards.dart';
+import 'database_helper.dart';
+import 'user.dart';
 
 class HomeTab extends StatefulWidget {
   @override
   _HomeTabState createState() => _HomeTabState();
 }
 
-class Content {
-  final String text;
-  final Color color;
-
-  Content({required this.text, required this.color});
-}
-
 class _HomeTabState extends State<HomeTab> {
   List<SwipeItem> _swipeItems = [];
+  List<User> defaultUsers = [];
   late MatchEngine _matchEngine;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-
-  // Example data - replace with your actual data
-  List<String> _names = ["Red", "Blue", "Green", "Yellow", "Orange"];
-  List<Color> _colors = [
-    Colors.red,
-    Colors.blue,
-    Colors.green,
-    Colors.yellow,
-    Colors.orange
-  ];
 
   @override
   void initState() {
     super.initState();
-    for (int i = 0; i < _names.length; i++) {
+    _fetchDefaultUsers();
+  }
+
+  void _fetchDefaultUsers() async {
+    defaultUsers = await DatabaseHelper.instance.users();
+    for (var user in defaultUsers) {
       _swipeItems.add(SwipeItem(
-        content: Content(text: _names[i], color: _colors[i]),
+        content: user,
         likeAction: () {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Liked ${_names[i]}"),
+            content: Text("Liked ${user.name}"),
             duration: Duration(milliseconds: 500),
           ));
         },
         nopeAction: () {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Nope ${_names[i]}"),
+            content: Text("Nope ${user.name}"),
             duration: Duration(milliseconds: 500),
           ));
         },
         superlikeAction: () {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Superliked ${_names[i]}"),
+            content: Text("Superliked ${user.name}"),
             duration: Duration(milliseconds: 500),
           ));
         },
       ));
     }
-
     _matchEngine = MatchEngine(swipeItems: _swipeItems);
+    setState(() {}); // Rebuild the widget with the fetched users
   }
 
   @override
@@ -69,18 +60,10 @@ class _HomeTabState extends State<HomeTab> {
             children: [
               Container(
                 height: MediaQuery.of(context).size.height * 0.6,
-                margin: EdgeInsets.symmetric(vertical: 8.0),
                 child: SwipeCards(
                   matchEngine: _matchEngine,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      alignment: Alignment.center,
-                      color: _swipeItems[index].content.color,
-                      child: Text(
-                        _swipeItems[index].content.text,
-                        style: TextStyle(fontSize: 100),
-                      ),
-                    );
+                    return buildUserCard(defaultUsers[index]);
                   },
                   onStackFinished: () {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -89,7 +72,7 @@ class _HomeTabState extends State<HomeTab> {
                     ));
                   },
                   itemChanged: (SwipeItem item, int index) {
-                    print("item: ${item.content.text}, index: $index");
+                    print("item: ${item.content.name}, index: $index");
                   },
                   upSwipeAllowed: true,
                   fillSpace: true,
@@ -119,6 +102,39 @@ class _HomeTabState extends State<HomeTab> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildUserCard(User user) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: <Widget>[
+// If you are using local assets for default images, make sure they are listed in your pubspec.yaml
+            Image.asset(user.imagePath,
+                width: 100, height: 100, fit: BoxFit.cover),
+            SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(user.username,
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                  Text(user.name, style: TextStyle(fontSize: 20)),
+                  Text('Age: ${user.age}', style: TextStyle(fontSize: 16)),
+                  Text('School: ${user.school}',
+                      style: TextStyle(fontSize: 16)),
+                  Text('Interests: ${user.interests}',
+                      style: TextStyle(fontSize: 16)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      elevation: 4.0, // Optional: Add shadow effect
     );
   }
 }
