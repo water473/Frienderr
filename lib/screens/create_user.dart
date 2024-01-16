@@ -64,8 +64,8 @@ class CreateUser extends StatelessWidget {
                     age: _ageController.text,
                     school: _schoolController.text,
                     interests: '', // Initially empty
-                    image:
-                        ' ', // Update this as per your image handling (path to image) blank for now
+                    imagePath:
+                        'assets/images/defaultprofile.jpg', // Update this as per your image handling (path to image) blank for now
                   );
 
                   await DatabaseHelper.instance.insertUser(newUser);

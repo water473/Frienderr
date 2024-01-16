@@ -51,7 +51,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
               age: user.age,
               school: user.school,
               interests: selectedInterestsString,
-              image: user.image, // Assuming you have image handling elsewhere
+              imagePath: user.imagePath, // Assuming you have image handling elsewhere
             );
 
             // Update the user in the database

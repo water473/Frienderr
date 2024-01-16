@@ -14,6 +14,17 @@ class UserProfile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Center(
+                    // Center the image horizontally
+                    child: Image.asset(
+                      'assets/images/defaultprofile.jpg', // Path to your image in assets
+                      width: 150, // Set the width as needed
+                      height: 150, // Set the height as needed
+                      fit: BoxFit
+                          .cover, // This is optional, use it as per your styling needs
+                    ),
+                  ),
+                  SizedBox(height: 20),
                   Text('Username: ${currentUser!.username}',
                       style: TextStyle(fontSize: 24)),
                   SizedBox(height: 20),
@@ -28,6 +39,7 @@ class UserProfile extends StatelessWidget {
                   SizedBox(height: 20),
                   Text('Interests: ${currentUser!.interests}',
                       style: TextStyle(fontSize: 24)),
+                  SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
                       // Set currentUser to null for logout

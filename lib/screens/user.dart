@@ -4,7 +4,7 @@ class User {
   final String username;
   final String password;
   final String interests;
-  final String image;
+  final String imagePath;
   final String age;
   final String school;
 
@@ -14,7 +14,7 @@ class User {
       required this.username,
       required this.password,
       required this.interests,
-      required this.image,
+      required this.imagePath,
       required this.age,
       required this.school});
 
@@ -26,8 +26,8 @@ class User {
       'username': username,
       'password': password,
       'interests': interests,
-      'image': image,
-      'age' : age,
+      'imagePath': imagePath,
+      'age': age,
       'school': school
     };
   }
@@ -39,7 +39,7 @@ class User {
       username: map['username'],
       password: map['password'],
       interests: map['interests'],
-      image: map['image'],
+      imagePath: map['imagePath'],
       age: map['age'],
       school: map['school'],
     );
