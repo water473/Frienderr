@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frienderr/screens/create_user.dart';
 import 'package:frienderr/screens/main_page.dart';
 import 'database_helper.dart';
-import 'user.dart'; // Make sure to import your User model
+import 'user.dart';
+import 'global.dart';
 
 class UsernameScreen extends StatelessWidget {
   TextEditingController _usernameController = TextEditingController();
@@ -43,7 +44,10 @@ class UsernameScreen extends StatelessWidget {
                   User? user =
                       await DatabaseHelper.instance.getUser(username, password);
                   if (user != null) {
-                    // Navigate to MainPage on successful login
+                    // Set the global currentUser to the logged user
+                    currentUser = user;
+
+                    // Navigate to MainPage
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => MainPage()),

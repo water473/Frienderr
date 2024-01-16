@@ -37,7 +37,8 @@ class CreateUser extends StatelessWidget {
               SizedBox(height: 20),
               TextField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Enter your name'),
+                decoration: InputDecoration(
+                    labelText: 'Enter your name, (First, Last)'),
               ),
               SizedBox(height: 20),
               TextField(
