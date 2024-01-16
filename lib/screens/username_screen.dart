@@ -16,7 +16,7 @@ class UsernameScreen extends StatelessWidget {
 
             const Text(
               'Frienderr',
-            )
+            ),
 
             const SizedBox(height: 20),
 
