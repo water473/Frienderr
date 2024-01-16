@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:frienderr/screens/chat_screen.dart';
 import 'user_profile.dart';
 import 'home_tab.dart';
-import 'chat_screen.dart';
 
 class MainPage extends StatefulWidget {
   @override
