@@ -3,7 +3,8 @@ import 'package:frienderr/screens/create_user.dart';
 import 'package:frienderr/screens/main_page.dart';
 
 class UsernameScreen extends StatelessWidget {
-  final TextEditingController _usernameController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class UsernameScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             TextField(
-              controller: _usernameController,
+              controller: _passwordController,
               decoration: InputDecoration(labelText: 'Enter your Password'),
               obscureText: true,
             ),

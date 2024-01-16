@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'interests_screen.dart';
 
 class CreateUser extends StatelessWidget {
-  final TextEditingController _usernameController = TextEditingController();
-
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
    @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +32,7 @@ class CreateUser extends StatelessWidget {
             ),
             SizedBox(height: 20),
             TextField(
-              controller: _usernameController,
+              controller: _passwordController,
               decoration: InputDecoration(labelText: 'Enter new Password'),
             ),
             SizedBox(height: 20),
