@@ -1,0 +1,47 @@
+class User {
+  final int? id;
+  final String name;
+  final String username;
+  final String password;
+  final String interests;
+  final String image;
+  final String age;
+  final String school;
+
+  User(
+      {this.id,
+      required this.name,
+      required this.username,
+      required this.password,
+      required this.interests,
+      required this.image,
+      required this.age,
+      required this.school});
+
+  // Convert a User into a Map. The keys must correspond to the names of the columns in the database.
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'username': username,
+      'password': password,
+      'interests': interests,
+      'image': image,
+      'age' : age,
+      'school': school
+    };
+  }
+
+  static User fromMap(Map<String, dynamic> map) {
+    return User(
+      id: map['id'],
+      name: map['name'],
+      username: map['username'],
+      password: map['password'],
+      interests: map['interests'],
+      image: map['image'],
+      age: map['age'],
+      school: map['school'],
+    );
+  }
+}
