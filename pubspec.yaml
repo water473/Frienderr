@@ -1,3 +1,4 @@
+
 name: frienderr
 description: A new Flutter project.
 publish_to: 'none'
@@ -9,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  swipe_cards: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +19,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
+

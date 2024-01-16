@@ -20,7 +20,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pink,
-        title: Text('Friend-Finder App'),
+        title: Text('Frienderr'),
       ),
       body: IndexedStack(
         index: _currentIndex,
