@@ -40,20 +40,20 @@ class UsernameScreen extends StatelessWidget {
                   String username = _usernameController.text;
                   String password = _passwordController.text;
 
-                  // Verify user credentials
+                  // Verify credentials
                   User? user =
                       await DatabaseHelper.instance.getUser(username, password);
                   if (user != null) {
                     // Set the global currentUser to the logged user
                     currentUser = user;
 
-                    // Navigate to MainPage
+                    // Navigate MainPage
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => MainPage()),
                     );
                   } else {
-                    // Show error on failed login
+                    // failed login error
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Invalid username or password')),
                     );

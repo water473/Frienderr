@@ -1,5 +1,3 @@
-// lib/screens/main_page.dart
-
 import 'package:flutter/material.dart';
 import 'package:frienderr/screens/chat_screen.dart';
 import 'user_profile.dart';

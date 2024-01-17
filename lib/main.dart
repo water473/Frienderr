@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      home: HomeScreen(), 
+      home: HomeScreen(),
     );
   }
 }

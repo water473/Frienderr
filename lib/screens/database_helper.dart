@@ -15,15 +15,12 @@ class DatabaseHelper {
   static final columnAge = 'age';
   static final columnSchool = 'school';
 
-  // Make this a singleton class.
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
-  // Only have a single app-wide reference to the database.
   static Database? _database;
   Future<Database> get database async => _database ??= await _initDatabase();
 
-  // Open the database and create it if it doesn't exist.
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), _databaseName);
     return await openDatabase(
@@ -67,7 +64,6 @@ class DatabaseHelper {
             'NBA', 'Basketball', 'assets/images/lebron_image.png');
         await _insertDefaultUser(db, 'alam101', 'Rakeen Alam', '1234', '16',
             'MSHS 141', 'Making Money', 'assets/images/rakeen_image.jpg');
-        // ... Add two more default users ...
       },
     );
   }
@@ -89,12 +85,10 @@ class DatabaseHelper {
       'age': age,
       'school': school,
       'interests': interests,
-      'imagePath':
-          imagePath, // Make sure this points to a valid image path or asset
+      'imagePath': imagePath,
     });
   }
 
-  // SQL code to create the database table.
   Future _onCreate(Database db, int version) async {
     await db.execute('''
           CREATE TABLE $table (
@@ -110,7 +104,6 @@ class DatabaseHelper {
           ''');
   }
 
-  // Insert a user into the database
   Future<void> insertUser(User user) async {
     Database db = await instance.database;
     await db.insert(
@@ -180,7 +173,6 @@ class DatabaseHelper {
         whereArgs: [username]);
 
     if (maps.isNotEmpty) {
-      // Cast the map to Map<String, dynamic> before passing it
       return User.fromMap(maps.first.cast<String, dynamic>());
     }
     return null;

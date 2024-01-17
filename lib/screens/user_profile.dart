@@ -53,7 +53,7 @@ class UserProfile extends StatelessWidget {
                     child: Text('Log Out'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors
-                          .pink, // Optional: style the logout button differently
+                          .pink, 
                     ),
                   ),
                 ],

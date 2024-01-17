@@ -64,16 +64,11 @@ class CreateUser extends StatelessWidget {
                     age: _ageController.text,
                     school: _schoolController.text,
                     interests: '', // Initially empty
-                    imagePath:
-                        'assets/images/defaultprofile.jpg', // Update this as per your image handling (path to image) blank for now
+                    imagePath: 'assets/images/defaultprofile.jpg',
                   );
 
                   await DatabaseHelper.instance.insertUser(newUser);
 
-                  // Check if the context is still valid
-                  //if (!mounted) return; only works on a statefull widget
-
-                  // Navigate to InterestsScreen with the username
                   Navigator.push(
                     context,
                     MaterialPageRoute(

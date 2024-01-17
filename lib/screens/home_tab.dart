@@ -46,7 +46,7 @@ class _HomeTabState extends State<HomeTab> {
       ));
     }
     _matchEngine = MatchEngine(swipeItems: _swipeItems);
-    setState(() {}); // Rebuild the widget with the fetched users
+    setState(() {});
   }
 
   @override
@@ -138,7 +138,7 @@ class _HomeTabState extends State<HomeTab> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-// Image at the top center
+// Image at top center
           Image.asset(user.imagePath,
               width: MediaQuery.of(context).size.width,
               height: 281,

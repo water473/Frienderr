@@ -35,10 +35,9 @@ class _InterestsScreenState extends State<InterestsScreen> {
       body: buildInterestsList(),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          // Convert the list of selected interests into a comma-separated string
+          // comma-separated string
           String selectedInterestsString = selectedInterests.join(', ');
 
-          // Fetch the user by the passed username
           User? user =
               await DatabaseHelper.instance.getUserByUsername(widget.username);
           if (user != null) {
@@ -51,18 +50,16 @@ class _InterestsScreenState extends State<InterestsScreen> {
               age: user.age,
               school: user.school,
               interests: selectedInterestsString,
-              imagePath: user.imagePath, // Assuming you have image handling elsewhere
+              imagePath: user.imagePath,
             );
 
             // Update the user in the database
             await DatabaseHelper.instance.updateUser(updatedUser);
 
-            // Navigate to the next screen or home page
+            // Navigate to the next screen
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      UsernameScreen()), // Replace with your desired page
+              MaterialPageRoute(builder: (context) => UsernameScreen()),
             );
           }
         },
