@@ -65,12 +65,8 @@ class _HomeTabState extends State<HomeTab> {
                   itemBuilder: (BuildContext context, int index) {
                     return buildUserCard(defaultUsers[index]);
                   },
-                  onStackFinished: () {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("Stack Finished"),
-                      duration: Duration(milliseconds: 500),
-                    ));
-                  },
+                  onStackFinished:
+                      _resetSwipeStack, // Reset the stack when finished
                   itemChanged: (SwipeItem item, int index) {
                     print("item: ${item.content.name}, index: $index");
                   },
@@ -105,36 +101,68 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 
+  void _resetSwipeStack() {
+    List<SwipeItem> newSwipeItems = defaultUsers.map((user) {
+      return SwipeItem(
+        content: user,
+        likeAction: () {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Liked ${user.name}"),
+            duration: Duration(milliseconds: 500),
+          ));
+        },
+        nopeAction: () {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Nope ${user.name}"),
+            duration: Duration(milliseconds: 500),
+          ));
+        },
+        superlikeAction: () {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Superliked ${user.name}"),
+            duration: Duration(milliseconds: 500),
+          ));
+        },
+      );
+    }).toList();
+
+    setState(() {
+      _swipeItems = newSwipeItems;
+      _matchEngine = MatchEngine(swipeItems: _swipeItems);
+    });
+  }
+
   Widget buildUserCard(User user) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: <Widget>[
-// If you are using local assets for default images, make sure they are listed in your pubspec.yaml
-            Image.asset(user.imagePath,
-                width: 200, height: 200, fit: BoxFit.cover),
-            SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(user.username,
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                  Text(user.name, style: TextStyle(fontSize: 20)),
-                  Text('Age: ${user.age}', style: TextStyle(fontSize: 16)),
-                  Text('School: ${user.school}',
-                      style: TextStyle(fontSize: 16)),
-                  Text('Interests: ${user.interests}',
-                      style: TextStyle(fontSize: 16)),
-                ],
-              ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+// Image at the top center
+          Image.asset(user.imagePath,
+              width: MediaQuery.of(context).size.width,
+              height: 281,
+              fit: BoxFit.cover),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+// Username in bold
+                Text(user.username,
+                    style:
+                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                Text(user.name, style: TextStyle(fontSize: 20)),
+                Text('Age: ${user.age}', style: TextStyle(fontSize: 16)),
+                Text('School: ${user.school}', style: TextStyle(fontSize: 16)),
+                Text('Interests: ${user.interests}',
+                    style: TextStyle(fontSize: 16)),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-      elevation: 4.0, // Optional: Add shadow effect
+      elevation: 10.0,
     );
   }
 }

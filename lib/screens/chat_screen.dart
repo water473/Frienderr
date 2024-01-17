@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'database_helper.dart';
+import 'global.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -8,13 +10,11 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _textController = TextEditingController();
   final List<String> _messages = [];
+  List<String> likedUsers = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat'),
-      ),
       body: Column(
         children: [
           Expanded(
