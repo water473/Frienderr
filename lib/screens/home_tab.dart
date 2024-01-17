@@ -141,7 +141,7 @@ class _HomeTabState extends State<HomeTab> {
 // Image at top center
           Image.asset(user.imagePath,
               width: MediaQuery.of(context).size.width,
-              height: 281,
+              height: 250,
               fit: BoxFit.cover),
           Padding(
             padding: const EdgeInsets.all(16.0),
