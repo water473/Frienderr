@@ -1,5 +1,5 @@
 # Frienderr
-- This app was developed in flutter alongside Navil and Adam.
+- I developed this app in flutter alongside Navil and Adam.
 - Tinder but for Friends!
 
 ## Key aspects
